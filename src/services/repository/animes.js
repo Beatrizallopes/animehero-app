@@ -10,3 +10,13 @@ export const getAnimes = async () => {
   }
   return null;
 };
+
+export const getAnimesFiltered = async (category) => {
+  try {
+    const response = await api.get('/anime?filter[categories]='+category);
+    return response;
+  } catch (err) {
+    console.log('[getAnimes]', err?.response);
+  }
+  return null;
+};

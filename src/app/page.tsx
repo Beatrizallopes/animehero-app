@@ -7,7 +7,7 @@ import Header from "@/components/Header/Header";
 import Footer from '@/components/Footer/Footer';
 import Tabs from "@/components/Tabs/Tabs";
 import AnimeBox from '@/components/AnimeBox/AnimeBox';
-import {getAnimes} from '../services/repository/animes';
+import {getAnimes, getAnimesFiltered} from '../services/repository/animes';
 
 const tabsOptions = [
   {
@@ -15,7 +15,7 @@ const tabsOptions = [
     filter: "all",
   },
   {
-    title: "Ação",
+    title: "Action",
     filter: "action",
   },
   {
@@ -23,16 +23,20 @@ const tabsOptions = [
     filter: "romance",
   },
   {
-    title: "Esporte",
-    filter: "sports",
+    title: "Adventure",
+    filter: "adventure",
   },
   {
-    title: "Fantasia",
+    title: "Fantasy",
     filter: "fantasy",
   },
   {
-    title: "Terror",
-    filter: "terror",
+    title: "Comedy",
+    filter: "comedy",
+  },
+  {
+    title: "Horror",
+    filter: "horror",
   },
 ]
 
@@ -41,10 +45,16 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [animesToShow, setAnimesToShow] = useState([]);
 
-
   async function getInfo(){
     try{
-      const response = await getAnimes();
+      setLoading(true);
+      let response;
+      console.log(activeTab)
+      if(tabsOptions[activeTab]?.filter === 'all'){
+        response = await getAnimes();
+      } else {
+        response = await getAnimesFiltered(tabsOptions[activeTab]?.filter);
+      }
       if(response && response.status === 200){
         setAnimesToShow(response?.data?.data);
       }
@@ -57,7 +67,7 @@ export default function Home() {
 
   useEffect(()=>{
     getInfo()
-  }, [])
+  }, [activeTab])
 
   function renderAnimesList(){
     if(loading){

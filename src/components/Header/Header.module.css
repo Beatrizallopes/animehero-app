@@ -3,7 +3,7 @@
   height: auto;
   background-color: #131B20;
   border-bottom: 1px solid #EE296B;
-  padding: 1rem 2rem;
+  padding: 0.5rem 1.5rem;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -12,7 +12,7 @@
 
 .header h2 {
   font-family: 'Nunito';
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: #F4F4F6;
 }

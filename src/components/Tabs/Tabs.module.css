@@ -9,7 +9,7 @@
 
 .tab {
   font-family: 'Nunito';
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: #F4F4F6;
   cursor: pointer;
@@ -18,7 +18,7 @@
 
 .activeTab {
   font-family: 'Nunito';
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: #EE296B;
   cursor: pointer;

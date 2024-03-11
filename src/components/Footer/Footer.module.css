@@ -1,0 +1,21 @@
+.footer {
+  width: 100%;
+  height: auto;
+  /* background-color: #131B20; */
+  padding: 1rem 1rem;
+  position: absolute;
+  bottom: 0px;
+}
+
+.footer h1 {
+  font-family: 'Nunito';
+  font-size: 14px;
+  font-weight: 600;
+  color: #F4F4F6;
+}
+
+.heart {
+  color: #EE296B;
+}
+
+

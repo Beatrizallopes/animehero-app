@@ -1,7 +1,10 @@
 'use client'
 import {useState, useEffect} from 'react';
+import { LoadingOutlined } from '@ant-design/icons';
+import { Spin } from 'antd';
 import styles from "./page.module.css";
 import Header from "@/components/Header/Header";
+import Footer from '@/components/Footer/Footer';
 import Tabs from "@/components/Tabs/Tabs";
 import AnimeBox from '@/components/AnimeBox/AnimeBox';
 import {getAnimes} from '../services/repository/animes';
@@ -38,7 +41,6 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [animesToShow, setAnimesToShow] = useState([]);
 
-  console.log(animesToShow);
 
   async function getInfo(){
     try{
@@ -60,7 +62,9 @@ export default function Home() {
   function renderAnimesList(){
     if(loading){
       return (
-        <h1>Carregando...</h1>
+        <div className={styles.loadingBox}>
+        <Spin indicator={<LoadingOutlined style={{ fontSize: 64, color: '#EE296B' }} spin />} />
+        </div>
       )
 
     } else {
@@ -101,7 +105,8 @@ export default function Home() {
         <div className={styles.ranking}>
 
         </div>
-      </div>
+      </div> 
+      <Footer></Footer>
     </main>
   );
 }

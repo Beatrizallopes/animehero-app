@@ -85,6 +85,12 @@ body {
   overflow-x: hidden;
 }
 
+body{
+  background: #161F25;
+  -webkit-font-smoothing: antialiased;
+  font-family: "Nunito", sans-serif;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(

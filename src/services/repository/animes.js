@@ -4,16 +4,22 @@ import api from "../api";
 export const getAnimes = async (limit, page, search) => {
   try {
     const offset = (page-1)*limit
-    const response = await api.get('/anime',{
-      params: {
-        page: {
-          offset,
-          limit
-        },
+    let params = {
+      page: {
+        offset,
+        limit
+      },
+    }
+    if(search !== ''){
+      params = {
+        ...params,
         filter: {
           text: search,
         }
       }
+    }
+    const response = await api.get('/anime',{
+      params,
     });
     return response;
   } catch (err) {

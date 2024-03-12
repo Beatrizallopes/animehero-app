@@ -165,7 +165,7 @@ export default function Home() {
             setActiveTab={setActiveTab}
             tabs={tabsOptions}
             ></Tabs>
-            <Search placeholder="Pesquisar anime..." onSearch={onSearch} style={{ width: 200 }} />
+            <Search placeholder="Search anime..." onSearch={onSearch} style={{ width: 200 }} />
           </div>
             {renderAnimesList()}
             <Pagination

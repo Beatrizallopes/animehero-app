@@ -1,5 +1,5 @@
 'use client'
-import {useState, useEffect} from 'react';
+import {useState, useEffect, Suspense} from 'react';
 import { useRouter, useSearchParams  } from 'next/navigation'
 import { LoadingOutlined, RollbackOutlined } from '@ant-design/icons';
 import { Spin, ConfigProvider, FloatButton, Image, Tag, Flex } from 'antd';
@@ -129,6 +129,7 @@ export default function Anime() {
         },
       }}
     >
+        <Suspense fallback={<div>Loading...</div>}>
     <main className={styles.main}>
       <Header></Header>
       {renderContent()}
@@ -139,6 +140,7 @@ export default function Anime() {
         icon={<RollbackOutlined />} />
       <Footer></Footer>
     </main>
+    </Suspense>
     </ConfigProvider>
   );
 }

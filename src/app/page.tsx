@@ -1,7 +1,7 @@
 'use client'
 import {useState, useEffect} from 'react';
 import { LoadingOutlined } from '@ant-design/icons';
-import { Spin } from 'antd';
+import { Spin, Pagination, ConfigProvider } from 'antd';
 import styles from "./page.module.css";
 import Header from "@/components/Header/Header";
 import Footer from '@/components/Footer/Footer';
@@ -44,16 +44,29 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState(0);
   const [loading, setLoading] = useState(true);
   const [animesToShow, setAnimesToShow] = useState([]);
+  const [pagination, setPagination] = useState({
+    actualPage: 1,
+    totalPages: 4,
+    limit: 15,
+  });
 
   async function getInfo(){
     try{
       setLoading(true);
       let response;
-      console.log(activeTab)
+      const {actualPage, totalPages, limit} = pagination;
       if(tabsOptions[activeTab]?.filter === 'all'){
-        response = await getAnimes();
+        response = await getAnimes(limit, actualPage);
+        setPagination(prevPagination => ({
+          ...prevPagination,
+          totalPages: Math.ceil(response?.data?.meta?.count / limit)
+        }));
       } else {
         response = await getAnimesFiltered(tabsOptions[activeTab]?.filter);
+        setPagination(prevPagination => ({
+          ...prevPagination,
+          totalPages: Math.ceil(response?.data?.meta?.count / limit)
+        }));
       }
       if(response && response.status === 200){
         setAnimesToShow(response?.data?.data);
@@ -67,7 +80,14 @@ export default function Home() {
 
   useEffect(()=>{
     getInfo()
-  }, [activeTab])
+  }, [activeTab, pagination.actualPage])
+
+  function handlePageChange(page) {
+    setPagination(prevPagination => ({
+      ...prevPagination,
+      actualPage: page
+    }));
+  }
 
   function renderAnimesList(){
     if(loading){
@@ -99,6 +119,20 @@ export default function Home() {
 
 
   return (
+    <ConfigProvider
+  theme={{
+    token: {
+      colorPrimary: '#FFFFFF',
+      colorText: '#FFFFFF',
+      colorTextDisabled: '#818080'
+    },
+    components: {
+      Pagination: {
+        itemActiveBg: '#EE296B',
+      },
+    },
+  }}
+>
     <main className={styles.main}>
       <Header></Header>
       <div className={styles.content}>
@@ -111,6 +145,13 @@ export default function Home() {
             ></Tabs>
           </div>
             {renderAnimesList()}
+            <Pagination
+              current={pagination.actualPage} // Use 'current' em vez de 'defaultCurrent'
+              total={pagination.totalPages}
+              onChange={handlePageChange} // Adiciona o manipulador de evento onChange
+              defaultPageSize={pagination?.limit}
+              showSizeChanger={false}
+            />
         </div>
         <div className={styles.ranking}>
 
@@ -118,5 +159,6 @@ export default function Home() {
       </div> 
       <Footer></Footer>
     </main>
+    </ConfigProvider>
   );
 }

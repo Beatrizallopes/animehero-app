@@ -34,6 +34,7 @@
   overflow: hidden; /* Oculta o texto que estiver fora do contêiner */
   text-overflow: ellipsis; 
   width: 90%;
+  font-family: 'Nunito';
 }
 
 .subtitle {
@@ -46,6 +47,7 @@
   color: #F4F4F6;
   opacity: 0.6;
   width: 90%;
+  font-family: 'Nunito';
 }
 
 .description {
@@ -55,6 +57,7 @@
   color: #F4F4F6;
   margin-top: 1rem;
   text-align:justify;
+  font-family: 'Nunito';
 }
 
 

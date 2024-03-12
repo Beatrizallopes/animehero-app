@@ -19,28 +19,20 @@ const tabsOptions = [
     filter: "all",
   },
   {
-    title: "Action",
-    filter: "action",
+    title: "Winter",
+    filter: "winter",
   },
   {
-    title: "Romance",
-    filter: "romance",
+    title: "Spring",
+    filter: "spring",
   },
   {
-    title: "Adventure",
-    filter: "adventure",
+    title: "Summer",
+    filter: "summer",
   },
   {
-    title: "Fantasy",
-    filter: "fantasy",
-  },
-  {
-    title: "Comedy",
-    filter: "comedy",
-  },
-  {
-    title: "Horror",
-    filter: "horror",
+    title: "Fall",
+    filter: "fall",
   },
 ]
 

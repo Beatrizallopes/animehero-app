@@ -96,6 +96,40 @@ export default function Home() {
 
   const onSearch: SearchProps['onSearch'] = (value, _e) => setSearch(value);
 
+  function isMobileDeviceByScreenSize() {
+    return window.innerWidth <= 768; // Defina o limite de largura da tela como desejar
+  }
+
+  function renderTabsRow(){
+    if(window.innerWidth <= 768){
+      return (
+      <div className={styles.columnTabs}>
+      <div className={styles.row}>
+        <Tabs
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        tabs={tabsOptions}
+        ></Tabs>
+      </div>
+      <Search placeholder="Search anime..." onSearch={onSearch} style={{ width: 300 }} />
+      </div>
+      )
+
+    } else {
+      return (
+        <div className={styles.row}>
+        <Tabs
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        tabs={tabsOptions}
+        ></Tabs>
+        <Search placeholder="Search anime..." onSearch={onSearch} style={{ width: 300 }} />
+      </div>
+        
+      )
+    }
+  }
+
   function renderAnimesList(){
     if(loading){
       return (
@@ -161,14 +195,17 @@ export default function Home() {
       <Header></Header>
       <div className={styles.content}>
         <div className={styles.animes}>
-          <div className={styles.row}>
-            <Tabs
-            activeTab={activeTab}
-            setActiveTab={setActiveTab}
-            tabs={tabsOptions}
-            ></Tabs>
+            {/* {renderTabsRow()} */}
+            <div className={styles.columnTabs}>
+            <div className={styles.row}>
+              <Tabs
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+              tabs={tabsOptions}
+              ></Tabs>
+            </div>
             <Search placeholder="Search anime..." onSearch={onSearch} style={{ width: 300 }} />
-          </div>
+            </div>
             {renderAnimesList()}
             <Pagination
               current={pagination.actualPage} 

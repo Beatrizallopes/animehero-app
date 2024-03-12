@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# AnimeHero: Catálogo de animes
 
-## Getting Started
+<p align="center">
+  <img src="public/logo.svg" alt="Logo do projeto">
+</p>
 
-First, run the development server:
+Sistema para consulta de catálogo de animes conectado à api Kitsu Api.
+O sistema possui as seguintes funcionalidades:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Tela principal:** tela que possui a lista dos animes cadastrados. Nessa tela o usuário poderá visualizar a lista de todos os animes ou separadamente por gênero, além de poder pesquisar um anime específico. Essa tela também conta com uma lista dos 10 animes mais populares atualmente.
+- **Detalhes do anime:** ao clicar em um anime específico na tela principal, o usuário é redirecionado à tela de detalhes do anime onde tem acesso à imagem, informações sobre o anime e ao trailer do anime. 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Acesse o projeto online através [deste link](https://animehero-app-t1jz.vercel.app).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Começando
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Os protótipos do projeto foram desenvolvidos e estão disponíveis no Figma. Para acessar, basta [clicar aqui](https://www.figma.com/file/BiswqsNnIXEaljAgUn2iB7/Project-AnimeHero?type=design&node-id=1%3A3&mode=design&t=0rQv81J8PGf5tRga-1)
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+### 📋 Pré-requisitos
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Para rodar o projeto na sua máquina, é necessário instalar o Node.Js, disponível no site oficial [site oficial](https://nodejs.org/en/download/).  É recomendável instalar a versão LTS (suporte de longo prazo). Siga o passo-a-passo de acordo com seu sistema operacional.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### 🔧 Instalação
 
-## Deploy on Vercel
+- Faça o download do repositório no seu computador e salve no local de sua preferência;
+- Acesse a pasta onde o repositório está salvo localmente e abra o prompt de comando;
+- Baixe todas as dependências necessárias:
+    ```
+    yarn
+    ```
+- Depois de finalizar a instalação, basta utilizar o seguinte comando para executar a aplicação:
+    ```
+    yarn dev
+    ```
+- Acesse a url gerada (que aparece no terminal);
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 🛠️ Construído com
+
+Mencione as ferramentas que você usou para criar seu projeto
+
+* [NextJS](https://nextjs.org/) - O framework usado
+* [TypeScript](https://www.typescriptlang.org) - Linguagem utilizada
+* [Ant.Design](https://ant.design) -  biblioteca de componentes UI (User Interface)
+* [Vercel](https://vercel.com) -  servidor para hospedar o projeto
+---
+⌨️ com ❤️ por [Beatriz Lopes ](https://github.com/Beatrizallopes) 😊
+

@@ -1,7 +1,9 @@
 import styles from "./AnimeBox.module.css";
+import Link from 'next/link'
 import Image from "next/image";
 
 interface Anime {
+  id: string;
   title: string;
   canonicalTitle: string;
   year: string;
@@ -19,16 +21,16 @@ function truncateText(text: string, characterCount: number): string {
   }
 }
 
-const AnimeBox: React.FC<Anime> = ({ title, canonicalTitle, year, userCount, coverImage, averageRating, description}) => {
+const AnimeBox: React.FC<Anime> = ({ id, title, canonicalTitle, year, userCount, coverImage, averageRating, description}) => {
   return (
-      <div className={styles.animebox}>
+      <Link className={styles.animebox} href={`/anime?id=${id}`}>
         <img className={styles.coverImg} src={coverImage} alt="cover img"></img>
         <h1 className={styles.title}>{canonicalTitle}</h1>
         <h1 className={styles.subtitle}>{title}</h1>
         <div className={styles.rowInfo}>   
         </div>
         <h3 className={styles.description}>{truncateText(description, 150)}</h3>
-      </div>
+      </Link>
   );
 }
 

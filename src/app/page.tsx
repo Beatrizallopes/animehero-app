@@ -109,6 +109,7 @@ export default function Home() {
         {animesToShow.map((anime, index)=>(
           <AnimeBox
             key={index}
+            id={anime?.id}
             title={anime?.attributes?.titles?.ja_jp}
             canonicalTitle={anime?.attributes?.canonicalTitle}
             year={anime?.attributes?.startDate}

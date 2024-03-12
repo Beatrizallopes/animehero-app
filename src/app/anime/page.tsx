@@ -1,6 +1,6 @@
 'use client'
 import {useState, useEffect} from 'react';
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams  } from 'next/navigation'
 import { LoadingOutlined, RollbackOutlined } from '@ant-design/icons';
 import { Spin, ConfigProvider, FloatButton  } from 'antd';
 import styles from "./page.module.css";
@@ -11,6 +11,8 @@ import Footer from '@/components/Footer/Footer';
 export default function Anime() {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const id = searchParams.get('id')
 
   // async function getInfo(){
   //   try{

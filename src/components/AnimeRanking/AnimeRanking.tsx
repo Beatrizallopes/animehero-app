@@ -24,7 +24,6 @@ const AnimeRanking: React.FC<void> = () => {
     try{
       setLoading(true);
       const response = await getTrendingAnimes();
-      console.log('response: ', response)
       if(response && response.status === 200){
         setRanking(response?.data?.data);
       }

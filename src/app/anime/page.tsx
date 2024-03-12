@@ -10,7 +10,7 @@ import Footer from '@/components/Footer/Footer';
 import { getAnimeById } from '@/services/repository/animes';
 
 
-export default function Anime() {
+function AnimeInfo() {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -129,7 +129,6 @@ export default function Anime() {
         },
       }}
     >
-        <Suspense fallback={<div>Loading...</div>}>
     <main className={styles.main}>
       <Header></Header>
       {renderContent()}
@@ -140,7 +139,14 @@ export default function Anime() {
         icon={<RollbackOutlined />} />
       <Footer></Footer>
     </main>
-    </Suspense>
     </ConfigProvider>
   );
+}
+
+export default function Anime() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <AnimeInfo></AnimeInfo>
+    </Suspense>
+  )
 }

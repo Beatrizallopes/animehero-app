@@ -26,6 +26,9 @@
   display: grid;
   grid-template-columns: 2fr 1fr;
   align-items:end;
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .column {

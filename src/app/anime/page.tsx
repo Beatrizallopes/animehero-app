@@ -2,7 +2,7 @@
 import {useState, useEffect} from 'react';
 import { useRouter, useSearchParams  } from 'next/navigation'
 import { LoadingOutlined, RollbackOutlined } from '@ant-design/icons';
-import { Spin, ConfigProvider, FloatButton  } from 'antd';
+import { Spin, ConfigProvider, FloatButton, Image } from 'antd';
 import styles from "./page.module.css";
 import Header from "@/components/Header/Header";
 import Footer from '@/components/Footer/Footer';
@@ -18,7 +18,6 @@ export default function Anime() {
 
   async function getInfo(){
     try{
-      console.log('id: ' + id);
       const response = await getAnimeById(id);
       if(response && response.status === 200){
         setAnimeInfo(response?.data?.data);
@@ -35,6 +34,27 @@ export default function Anime() {
   }, [])
 
   console.log('animeInfo',animeInfo)
+
+  function renderContent(){
+    if(loading){
+      return (
+        <div className={styles.loadingBox}>
+        <Spin indicator={<LoadingOutlined style={{ fontSize: 64, color: '#EE296B' }} spin />} />
+        </div>
+      )
+
+    } else {
+      return (
+        <div className={styles.content}>
+          <div className={styles.mainInfo}>
+            <Image src={animeInfo?.attributes?.coverImage?.tiny} className={styles.poster} width={"100%"} height={200} alt="poster"></Image>
+            <h1 className={styles.title}>{animeInfo?.attributes?.canonicalTitle}</h1>
+            <h1 className={styles.subtitle}>{animeInfo?.attributes?.titles?.ja_jp}</h1>
+          </div>
+        </div> 
+      )
+    }
+  }
 
 
   return (
@@ -60,8 +80,8 @@ export default function Anime() {
     >
     <main className={styles.main}>
       <Header></Header>
-      <div className={styles.content}>
-      </div> 
+      {renderContent()}
+   
       <FloatButton 
         onClick={() =>  router.push('/')}
         tooltip={<div>Voltar para animes</div>} 

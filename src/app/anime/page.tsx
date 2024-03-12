@@ -6,45 +6,35 @@ import { Spin, ConfigProvider, FloatButton  } from 'antd';
 import styles from "./page.module.css";
 import Header from "@/components/Header/Header";
 import Footer from '@/components/Footer/Footer';
+import { getAnimeById } from '@/services/repository/animes';
 
 
 export default function Anime() {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const searchParams = useSearchParams();
-  const id = searchParams.get('id')
+  const id = searchParams.get('id');
+  const [animeInfo, setAnimeInfo] = useState({});
 
-  // async function getInfo(){
-  //   try{
-  //     setLoading(true);
-  //     let response;
-  //     const {actualPage, totalPages, limit} = pagination;
-  //     if(tabsOptions[activeTab]?.filter === 'all'){
-  //       response = await getAnimes(limit, actualPage, search);
-  //       setPagination(prevPagination => ({
-  //         ...prevPagination,
-  //         totalPages: Math.ceil(response?.data?.meta?.count / limit)
-  //       }));
-  //     } else {
-  //       response = await getAnimesFiltered(tabsOptions[activeTab]?.filter, limit, actualPage, search);
-  //       setPagination(prevPagination => ({
-  //         ...prevPagination,
-  //         totalPages: Math.ceil(response?.data?.meta?.count / limit)
-  //       }));
-  //     }
-  //     if(response && response.status === 200){
-  //       setAnimesToShow(response?.data?.data);
-  //     }
-  //   } catch(err){
-  //     console.log(err);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // }
+  async function getInfo(){
+    try{
+      console.log('id: ' + id);
+      const response = await getAnimeById(id);
+      if(response && response.status === 200){
+        setAnimeInfo(response?.data?.data);
+      }
+    } catch(err){
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  }
 
-  // useEffect(()=>{
-  //   getInfo()
-  // }, [])
+  useEffect(()=>{
+    getInfo()
+  }, [])
+
+  console.log('animeInfo',animeInfo)
 
 
   return (

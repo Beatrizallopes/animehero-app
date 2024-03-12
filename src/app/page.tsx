@@ -114,7 +114,7 @@ export default function Home() {
             canonicalTitle={anime?.attributes?.canonicalTitle}
             year={anime?.attributes?.startDate}
             userCount={anime?.attributes?.userCount}
-            coverImage={anime?.attributes?.coverImage?.tiny} 
+            coverImage={anime?.attributes?.posterImage?.large} 
             averageRating={anime?.attributes?.averageRating} 
             description={anime?.attributes?.description}
           ></AnimeBox>

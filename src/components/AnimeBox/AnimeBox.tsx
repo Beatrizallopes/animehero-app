@@ -27,8 +27,6 @@ const AnimeBox: React.FC<Anime> = ({ id, title, canonicalTitle, year, userCount,
         <img className={styles.coverImg} src={coverImage} alt="cover img"></img>
         <h1 className={styles.title}>{canonicalTitle}</h1>
         <h1 className={styles.subtitle}>{title}</h1>
-        <div className={styles.rowInfo}>   
-        </div>
         <h3 className={styles.description}>{truncateText(description, 150)}</h3>
       </Link>
   );

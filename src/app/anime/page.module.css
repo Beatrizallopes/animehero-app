@@ -71,5 +71,26 @@
   font-family: 'Nunito';
 }
 
+.description {
+  width: 100%;
+  font-size: 14px;
+  font-weight: 500;
+  color: #F4F4F6;
+  margin-top: 0.5rem;
+  text-align:justify;
+  font-family: 'Nunito';
+}
+
+.info {
+  width: 100%;
+  font-size: 14px;
+  font-weight: 600;
+  color: #F4F4F6;
+  margin-top: 0.5rem;
+  text-align:justify;
+  font-family: 'Nunito';
+  margin-bottom: 0.5rem;
+}
+
 
 

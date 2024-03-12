@@ -11,6 +11,7 @@ import Tabs from "@/components/Tabs/Tabs";
 import AnimeBox from '@/components/AnimeBox/AnimeBox';
 import {getAnimes, getAnimesFiltered} from '../services/repository/animes';
 import AnimeRanking from '@/components/AnimeRanking/AnimeRanking';
+import { AxiosResponse } from 'axios';
 
 const tabsOptions = [
   {
@@ -46,7 +47,7 @@ const tabsOptions = [
 export default function Home() {
   const [activeTab, setActiveTab] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [animesToShow, setAnimesToShow] = useState([]);
+  const [animesToShow, setAnimesToShow] = useState<any[]>([]);
   const [pagination, setPagination] = useState({
     actualPage: 1,
     totalPages: 4,
@@ -57,7 +58,7 @@ export default function Home() {
   async function getInfo(){
     try{
       setLoading(true);
-      let response;
+      let response: AxiosResponse<any, any> | null;
       const {actualPage, totalPages, limit} = pagination;
       if(tabsOptions[activeTab]?.filter === 'all'){
         response = await getAnimes(limit, actualPage, search);
@@ -94,6 +95,40 @@ export default function Home() {
   }
 
   const onSearch: SearchProps['onSearch'] = (value, _e) => setSearch(value);
+
+  function isMobileDeviceByScreenSize() {
+    return window.innerWidth <= 768; // Defina o limite de largura da tela como desejar
+  }
+
+  function renderTabsRow(){
+    if(window.innerWidth <= 768){
+      return (
+      <div className={styles.columnTabs}>
+      <div className={styles.row}>
+        <Tabs
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        tabs={tabsOptions}
+        ></Tabs>
+      </div>
+      <Search placeholder="Search anime..." onSearch={onSearch} style={{ width: 300 }} />
+      </div>
+      )
+
+    } else {
+      return (
+        <div className={styles.row}>
+        <Tabs
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        tabs={tabsOptions}
+        ></Tabs>
+        <Search placeholder="Search anime..." onSearch={onSearch} style={{ width: 300 }} />
+      </div>
+        
+      )
+    }
+  }
 
   function renderAnimesList(){
     if(loading){
@@ -160,14 +195,17 @@ export default function Home() {
       <Header></Header>
       <div className={styles.content}>
         <div className={styles.animes}>
-          <div className={styles.row}>
-            <Tabs
-            activeTab={activeTab}
-            setActiveTab={setActiveTab}
-            tabs={tabsOptions}
-            ></Tabs>
-            <Search placeholder="Search anime..." onSearch={onSearch} style={{ width: 200 }} />
-          </div>
+            {/* {renderTabsRow()} */}
+            <div className={styles.columnTabs}>
+            <div className={styles.row}>
+              <Tabs
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+              tabs={tabsOptions}
+              ></Tabs>
+            </div>
+            <Search placeholder="Search anime..." onSearch={onSearch} style={{ width: 300 }} />
+            </div>
             {renderAnimesList()}
             <Pagination
               current={pagination.actualPage} 

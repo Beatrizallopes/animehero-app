@@ -15,7 +15,7 @@ export default function Anime() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const id = searchParams.get('id');
-  const [animeInfo, setAnimeInfo] = useState({});
+  const [animeInfo, setAnimeInfo] = useState<any>({});
 
   async function getInfo(){
     try{
@@ -34,7 +34,6 @@ export default function Anime() {
     getInfo()
   }, [])
 
-  console.log('animeInfo',animeInfo)
 
   function renderFinishedTag(){
     if(animeInfo?.attributes?.status === 'finished'){

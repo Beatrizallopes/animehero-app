@@ -4,7 +4,11 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 0rem;
+  padding: 0rem;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    padding-bottom: 0.5rem;
+  }
 }
 
 .tab {
@@ -13,6 +17,9 @@
   font-weight: 600;
   color: #F4F4F6;
   cursor: pointer;
+  @media screen and (max-width: 768px) {
+    font-size: 12px;
+  }
 
 }
 
@@ -22,4 +29,7 @@
   font-weight: 600;
   color: #EE296B;
   cursor: pointer;
+  @media screen and (max-width: 768px) {
+    font-size: 12px;
+  }
 }

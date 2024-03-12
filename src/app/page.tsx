@@ -1,7 +1,7 @@
 'use client'
 import {useState, useEffect} from 'react';
 import { LoadingOutlined } from '@ant-design/icons';
-import { Spin, Pagination, ConfigProvider, Input } from 'antd';
+import { Spin, Pagination, ConfigProvider, Input} from 'antd';
 const { Search } = Input;
 import type { SearchProps } from 'antd/es/input/Search';
 import styles from "./page.module.css";
@@ -109,11 +109,12 @@ export default function Home() {
         {animesToShow.map((anime, index)=>(
           <AnimeBox
             key={index}
+            id={anime?.id}
             title={anime?.attributes?.titles?.ja_jp}
             canonicalTitle={anime?.attributes?.canonicalTitle}
             year={anime?.attributes?.startDate}
             userCount={anime?.attributes?.userCount}
-            coverImage={anime?.attributes?.coverImage?.tiny} 
+            coverImage={anime?.attributes?.posterImage?.large} 
             averageRating={anime?.attributes?.averageRating} 
             description={anime?.attributes?.description}
           ></AnimeBox>

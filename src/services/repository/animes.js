@@ -63,3 +63,13 @@ export const getTrendingAnimes = async () => {
   return null;
 };
 
+export const getAnimeById = async (id) => {
+  try {
+    const response = await api.get('/anime/' + id);
+    return response;
+  } catch (err) {
+    console.log('[getAnimeById]', err?.response);
+  }
+  return null;
+};
+

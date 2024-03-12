@@ -1,0 +1,91 @@
+.animeRanking {
+  height: auto;
+  min-height: 400px;
+  width: 90%;
+  background-color: #131B20;
+  padding: 1rem 1rem;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+.loadingBox {
+  width: 100%;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.anime {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 48px;
+  /* margin-top: 1rem; */
+  cursor: pointer;
+  transition: transform .2s;
+}
+
+.anime:hover {
+  transform: scale(1.05);
+  background-color: #21282D;
+  border-radius: 8px;
+}
+
+.anime h3 {
+  font-size: 12px;
+  font-weight: 500;
+  color: #F4F4F6;
+  text-align: left;
+  white-space: nowrap; /* Impede que o texto quebre para uma nova linha */
+  overflow: hidden; /* Oculta o texto que estiver fora do contêiner */
+  text-overflow: ellipsis; 
+  width: 100%;
+  font-family: 'Nunito';
+}
+
+.animeTop {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 48px;
+  /* margin-top: 1rem; */
+  cursor: pointer;
+  transition: transform .2s;
+}
+
+
+.animeTop:hover {
+  transform: scale(1.05);
+  background-color: #21282D;
+  border-radius: 8px;
+}
+
+.animeTop h3 {
+  font-size: 12px;
+  font-weight: 700;
+  color: #5FD37E;
+  text-align: left;
+  white-space: nowrap; /* Impede que o texto quebre para uma nova linha */
+  overflow: hidden; /* Oculta o texto que estiver fora do contêiner */
+  text-overflow: ellipsis; 
+  width: 100%;
+  font-family: 'Nunito';
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%; 
+  margin-right: 0.5rem;
+  object-fit: cover;
+}
+
+
+

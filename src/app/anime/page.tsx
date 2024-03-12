@@ -1,95 +1,145 @@
-import Image from "next/image";
+'use client'
+import {useState, useEffect} from 'react';
+import { useRouter, useSearchParams  } from 'next/navigation'
+import { LoadingOutlined, RollbackOutlined } from '@ant-design/icons';
+import { Spin, ConfigProvider, FloatButton, Image, Tag, Flex } from 'antd';
+import ReactPlayer from 'react-player/youtube';
 import styles from "./page.module.css";
+import Header from "@/components/Header/Header";
+import Footer from '@/components/Footer/Footer';
+import { getAnimeById } from '@/services/repository/animes';
 
-export default function Home() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
+
+export default function Anime() {
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const id = searchParams.get('id');
+  const [animeInfo, setAnimeInfo] = useState({});
+
+  async function getInfo(){
+    try{
+      const response = await getAnimeById(id);
+      if(response && response.status === 200){
+        setAnimeInfo(response?.data?.data);
+      }
+    } catch(err){
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(()=>{
+    getInfo()
+  }, [])
+
+  console.log('animeInfo',animeInfo)
+
+  function renderFinishedTag(){
+    if(animeInfo?.attributes?.status === 'finished'){
+      return (
+        <Tag color="#5FD37E">finished</Tag>
+      )
+    } else {
+      return (
+        <Tag color="#f50">om going</Tag>
+      )
+    }
+  }
+
+  function renderMediaTag(){
+      return (
+        <Tag color="#108ee9">{animeInfo?.attributes?.showType}</Tag>
+      )
+    } 
+
+    function renderAgeTag(){
+      return (
+        <Tag color="#EE296B">{animeInfo?.attributes?.ageRating}</Tag>
+      )
+    } 
+
+    const YouTubePlayer = () => {
+      return (
         <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+          <br></br>
+          <ReactPlayer
+            url={`https://www.youtube.com/watch?v=${animeInfo?.attributes?.youtubeVideoId}`}
+            controls
+            width="100%"
+            height="240px"
+          />
         </div>
-      </div>
+      );
+    };
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+  function renderContent(){
+    if(loading){
+      return (
+        <div className={styles.loadingBox}>
+        <Spin indicator={<LoadingOutlined style={{ fontSize: 64, color: '#EE296B' }} spin />} />
+        </div>
+      )
 
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
+    } else {
+      return (
+        <div className={styles.content}>
+          <div className={styles.mainInfo}>
+            <Image src={animeInfo?.attributes?.coverImage?.large} className={styles.poster} width={"100%"} height={200} alt="poster"></Image>
+            <div className={styles.row}>
+              <div className={styles.column}>
+                <h1 className={styles.title}>{animeInfo?.attributes?.canonicalTitle}</h1>
+                <h1 className={styles.subtitle}>{animeInfo?.attributes?.titles?.ja_jp}</h1>
+                <h1 className={styles.info}>Episodes: {animeInfo?.attributes?.episodeCount} | Duration: {animeInfo?.attributes?.episodeLength} min. </h1>
+                <Flex gap="4px 4px" wrap="wrap">
+                  {renderFinishedTag()}
+                  {renderMediaTag()}
+                  {renderAgeTag()}
+                </Flex>
+                <h3 className={styles.description}>{animeInfo?.attributes?.description}</h3>
+              </div>
+              <YouTubePlayer></YouTubePlayer>
+            </div>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
+          </div>
+        </div> 
+      )
+    }
+  }
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+  return (
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: '#FFFFFF',
+          colorText: '#FFFFFF',
+          colorTextDisabled: '#818080',
+          colorBgContainer: '#161F25',
+          colorBorder:'#FFFFFF',
+          colorErrorBg:'#161F25',
+          colorTextDescription: '#FFFFFF',
+          colorTextPlaceholder:'#FFFFFF',
+          fontFamily:'Nunito',
+          colorIcon: '#EE296B',
+          colorFillSecondary: '#EE296B',
+          colorBgElevated: '#EE296B'
+        },
+        components: {
+        },
+      }}
+    >
+    <main className={styles.main}>
+      <Header></Header>
+      {renderContent()}
+   
+      <FloatButton 
+        onClick={() =>  router.push('/')}
+        tooltip={<div>Voltar para animes</div>} 
+        icon={<RollbackOutlined />} />
+      <Footer></Footer>
     </main>
+    </ConfigProvider>
   );
 }

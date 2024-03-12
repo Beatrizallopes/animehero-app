@@ -28,24 +28,29 @@ export const getAnimes = async (limit, page, search) => {
   return null;
 };
 
-export const getAnimesFiltered = async (category, limit, page, search) => {
+export const getAnimesFiltered = async (season, limit, page, search) => {
   try {
-    const offset = (page-1)*limit
-    const response = await api.get('/anime',
-    {
-      params: {
-        params: {
-          page: {
-            offset,
-            limit
-          },
-          filter: {
-            category: category,
-            text: search,
-          }
+    const offset = (page-1)*limit;
+    let params = {
+      page: {
+        offset,
+        limit
+      },
+      filter: {
+        season: season
+      }
+    };
+    if(search !== ''){
+      params = {
+        ...params,
+        filter: {
+          season: season,
+          text: search,
         }
       }
-    });
+    }
+
+    const response = await api.get('/anime',{params});
     return response;
   } catch (err) {
     console.log('[getAnimesFiltered]', err?.response);

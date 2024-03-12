@@ -3,6 +3,7 @@ import {useState, useEffect} from 'react';
 import { useRouter, useSearchParams  } from 'next/navigation'
 import { LoadingOutlined, RollbackOutlined } from '@ant-design/icons';
 import { Spin, ConfigProvider, FloatButton, Image, Tag, Flex } from 'antd';
+import ReactPlayer from 'react-player/youtube';
 import styles from "./page.module.css";
 import Header from "@/components/Header/Header";
 import Footer from '@/components/Footer/Footer';
@@ -38,7 +39,7 @@ export default function Anime() {
   function renderFinishedTag(){
     if(animeInfo?.attributes?.status === 'finished'){
       return (
-        <Tag color="#37A69B">finished</Tag>
+        <Tag color="#5FD37E">finished</Tag>
       )
     } else {
       return (
@@ -59,6 +60,20 @@ export default function Anime() {
       )
     } 
 
+    const YouTubePlayer = () => {
+      return (
+        <div>
+          <br></br>
+          <ReactPlayer
+            url={`https://www.youtube.com/watch?v=${animeInfo?.attributes?.youtubeVideoId}`}
+            controls
+            width="100%"
+            height="240px"
+          />
+        </div>
+      );
+    };
+
   function renderContent(){
     if(loading){
       return (
@@ -72,15 +87,21 @@ export default function Anime() {
         <div className={styles.content}>
           <div className={styles.mainInfo}>
             <Image src={animeInfo?.attributes?.coverImage?.large} className={styles.poster} width={"100%"} height={200} alt="poster"></Image>
-            <h1 className={styles.title}>{animeInfo?.attributes?.canonicalTitle}</h1>
-            <h1 className={styles.subtitle}>{animeInfo?.attributes?.titles?.ja_jp}</h1>
-            <h1 className={styles.info}>Episodes: {animeInfo?.attributes?.episodeCount} | Duration: {animeInfo?.attributes?.episodeLength} min. </h1>
-            <Flex gap="4px 4px" wrap="wrap">
-              {renderFinishedTag()}
-              {renderMediaTag()}
-              {renderAgeTag()}
-            </Flex>
-            <h3 className={styles.description}>{animeInfo?.attributes?.description}</h3>
+            <div className={styles.row}>
+              <div className={styles.column}>
+                <h1 className={styles.title}>{animeInfo?.attributes?.canonicalTitle}</h1>
+                <h1 className={styles.subtitle}>{animeInfo?.attributes?.titles?.ja_jp}</h1>
+                <h1 className={styles.info}>Episodes: {animeInfo?.attributes?.episodeCount} | Duration: {animeInfo?.attributes?.episodeLength} min. </h1>
+                <Flex gap="4px 4px" wrap="wrap">
+                  {renderFinishedTag()}
+                  {renderMediaTag()}
+                  {renderAgeTag()}
+                </Flex>
+                <h3 className={styles.description}>{animeInfo?.attributes?.description}</h3>
+              </div>
+              <YouTubePlayer></YouTubePlayer>
+            </div>
+
           </div>
         </div> 
       )

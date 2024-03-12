@@ -13,12 +13,24 @@
   height: 100%;
   width: calc(100% - 3rem);
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: flex-start;
   /* margin-left: 3rem; */
   margin-top: 1rem;
   padding-bottom: 4rem;
+  
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  align-items:end;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
 }
 
 .mainInfo {
@@ -26,7 +38,7 @@
   border-radius: 16px;
   width: 100%;
   padding: 1rem 1rem;
-
+  padding-bottom: 2rem;
 }
 
 .loadingBox {
@@ -72,7 +84,7 @@
 }
 
 .description {
-  width: 100%;
+  width: 95%;
   font-size: 14px;
   font-weight: 500;
   color: #F4F4F6;

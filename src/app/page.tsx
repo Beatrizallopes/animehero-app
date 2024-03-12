@@ -11,6 +11,7 @@ import Tabs from "@/components/Tabs/Tabs";
 import AnimeBox from '@/components/AnimeBox/AnimeBox';
 import {getAnimes, getAnimesFiltered} from '../services/repository/animes';
 import AnimeRanking from '@/components/AnimeRanking/AnimeRanking';
+import { AxiosResponse } from 'axios';
 
 const tabsOptions = [
   {
@@ -46,7 +47,7 @@ const tabsOptions = [
 export default function Home() {
   const [activeTab, setActiveTab] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [animesToShow, setAnimesToShow] = useState([]);
+  const [animesToShow, setAnimesToShow] = useState<any[]>([]);
   const [pagination, setPagination] = useState({
     actualPage: 1,
     totalPages: 4,
@@ -57,7 +58,7 @@ export default function Home() {
   async function getInfo(){
     try{
       setLoading(true);
-      let response;
+      let response: AxiosResponse<any, any> | null;
       const {actualPage, totalPages, limit} = pagination;
       if(tabsOptions[activeTab]?.filter === 'all'){
         response = await getAnimes(limit, actualPage, search);
@@ -166,7 +167,7 @@ export default function Home() {
             setActiveTab={setActiveTab}
             tabs={tabsOptions}
             ></Tabs>
-            <Search placeholder="Search anime..." onSearch={onSearch} style={{ width: 200 }} />
+            <Search placeholder="Search anime..." onSearch={onSearch} style={{ width: 300 }} />
           </div>
             {renderAnimesList()}
             <Pagination

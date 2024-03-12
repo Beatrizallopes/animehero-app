@@ -16,8 +16,8 @@ interface AnimeRankingProps {
   ranking: Anime[];
 }
 
-const AnimeRanking: React.FC<void> = () => {
-  const [ranking, setRanking] = useState([]);
+const AnimeRanking: React.FC = () => {
+  const [ranking, setRanking] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   async function getInfo(){

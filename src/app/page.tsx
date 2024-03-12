@@ -62,7 +62,7 @@ export default function Home() {
           totalPages: Math.ceil(response?.data?.meta?.count / limit)
         }));
       } else {
-        response = await getAnimesFiltered(tabsOptions[activeTab]?.filter);
+        response = await getAnimesFiltered(tabsOptions[activeTab]?.filter, limit, actualPage);
         setPagination(prevPagination => ({
           ...prevPagination,
           totalPages: Math.ceil(response?.data?.meta?.count / limit)
@@ -146,9 +146,9 @@ export default function Home() {
           </div>
             {renderAnimesList()}
             <Pagination
-              current={pagination.actualPage} // Use 'current' em vez de 'defaultCurrent'
+              current={pagination.actualPage} 
               total={pagination.totalPages}
-              onChange={handlePageChange} // Adiciona o manipulador de evento onChange
+              onChange={handlePageChange} 
               defaultPageSize={pagination?.limit}
               showSizeChanger={false}
             />

@@ -1,7 +1,7 @@
 'use client'
 import {useState, useEffect} from 'react';
 import { LoadingOutlined } from '@ant-design/icons';
-import { Spin, Pagination, ConfigProvider, Input } from 'antd';
+import { Spin, Pagination, ConfigProvider, Input} from 'antd';
 const { Search } = Input;
 import type { SearchProps } from 'antd/es/input/Search';
 import styles from "./page.module.css";

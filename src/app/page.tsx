@@ -1,7 +1,9 @@
 'use client'
 import {useState, useEffect} from 'react';
 import { LoadingOutlined } from '@ant-design/icons';
-import { Spin, Pagination, ConfigProvider } from 'antd';
+import { Spin, Pagination, ConfigProvider, Input } from 'antd';
+const { Search } = Input;
+import type { SearchProps } from 'antd/es/input/Search';
 import styles from "./page.module.css";
 import Header from "@/components/Header/Header";
 import Footer from '@/components/Footer/Footer';
@@ -49,6 +51,7 @@ export default function Home() {
     totalPages: 4,
     limit: 15,
   });
+  const [search, setSearch] = useState('');
 
   async function getInfo(){
     try{
@@ -56,13 +59,13 @@ export default function Home() {
       let response;
       const {actualPage, totalPages, limit} = pagination;
       if(tabsOptions[activeTab]?.filter === 'all'){
-        response = await getAnimes(limit, actualPage);
+        response = await getAnimes(limit, actualPage, search);
         setPagination(prevPagination => ({
           ...prevPagination,
           totalPages: Math.ceil(response?.data?.meta?.count / limit)
         }));
       } else {
-        response = await getAnimesFiltered(tabsOptions[activeTab]?.filter, limit, actualPage);
+        response = await getAnimesFiltered(tabsOptions[activeTab]?.filter, limit, actualPage, search);
         setPagination(prevPagination => ({
           ...prevPagination,
           totalPages: Math.ceil(response?.data?.meta?.count / limit)
@@ -80,14 +83,16 @@ export default function Home() {
 
   useEffect(()=>{
     getInfo()
-  }, [activeTab, pagination.actualPage])
+  }, [activeTab, pagination.actualPage, search])
 
-  function handlePageChange(page) {
+  function handlePageChange(page: number) {
     setPagination(prevPagination => ({
       ...prevPagination,
       actualPage: page
     }));
   }
+
+  const onSearch: SearchProps['onSearch'] = (value, _e) => setSearch(value);
 
   function renderAnimesList(){
     if(loading){
@@ -120,19 +125,32 @@ export default function Home() {
 
   return (
     <ConfigProvider
-  theme={{
-    token: {
-      colorPrimary: '#FFFFFF',
-      colorText: '#FFFFFF',
-      colorTextDisabled: '#818080'
-    },
-    components: {
-      Pagination: {
-        itemActiveBg: '#EE296B',
-      },
-    },
-  }}
->
+      theme={{
+        token: {
+          colorPrimary: '#FFFFFF',
+          colorText: '#FFFFFF',
+          colorTextDisabled: '#818080',
+          colorBgContainer: '#161F25',
+          colorBorder:'#EE296B',
+          colorErrorBg:'#161F25',
+          colorTextDescription: '#FFFFFF',
+          colorTextPlaceholder:'#FFFFFF',
+          fontFamily:'Nunito',
+        },
+        components: {
+          Pagination: {
+            itemActiveBg: '#EE296B',
+          },
+          Input: {
+            activeBg: '#161F25',
+            activeBorderColor: '#EE296B',
+            addonBg: '#EE296B',
+            hoverBg: '#161F25',
+            hoverBorderColor:'#EE296B'
+          }
+        },
+      }}
+    >
     <main className={styles.main}>
       <Header></Header>
       <div className={styles.content}>
@@ -143,6 +161,7 @@ export default function Home() {
             setActiveTab={setActiveTab}
             tabs={tabsOptions}
             ></Tabs>
+            <Search placeholder="Pesquisar anime..." onSearch={onSearch} style={{ width: 200 }} />
           </div>
             {renderAnimesList()}
             <Pagination

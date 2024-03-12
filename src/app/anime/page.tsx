@@ -1,5 +1,5 @@
 'use client'
-import {useState, useEffect, Suspense} from 'react';
+import {useState, useEffect} from 'react';
 import { useRouter, useSearchParams  } from 'next/navigation'
 import { LoadingOutlined, RollbackOutlined } from '@ant-design/icons';
 import { Spin, ConfigProvider, FloatButton, Image, Tag, Flex } from 'antd';
@@ -14,7 +14,7 @@ export default function Anime() {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const searchParams = useSearchParams();
-  const id = searchParams.get('id');
+  const id = searchParams.has('id') ? searchParams.get('id') : 0;
   const [animeInfo, setAnimeInfo] = useState<any>({});
 
   async function getInfo(){
@@ -109,7 +109,6 @@ export default function Anime() {
 
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
     <ConfigProvider
       theme={{
         token: {
@@ -141,6 +140,5 @@ export default function Anime() {
       <Footer></Footer>
     </main>
     </ConfigProvider>
-    </Suspense>
   );
 }

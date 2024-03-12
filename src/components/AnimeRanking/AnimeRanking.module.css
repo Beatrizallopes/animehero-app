@@ -29,6 +29,7 @@
   /* margin-top: 1rem; */
   cursor: pointer;
   transition: transform .2s;
+  animation: slideIn 0.5s ease forwards;
 }
 
 .anime:hover {
@@ -58,6 +59,7 @@
   /* margin-top: 1rem; */
   cursor: pointer;
   transition: transform .2s;
+  animation: slideIn 0.5s ease forwards;
 }
 
 
@@ -85,6 +87,18 @@
   border-radius: 50%; 
   margin-right: 0.5rem;
   object-fit: cover;
+}
+
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-10%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 

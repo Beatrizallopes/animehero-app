@@ -8,6 +8,9 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  @media screen and (max-width: 768px) {
+    justify-content: center;
+  }
 }
 
 .header h2 {
@@ -15,11 +18,28 @@
   font-size: 16px;
   font-weight: 600;
   color: #F4F4F6;
+  animation: slideIn 0.5s ease forwards;
+  @media screen and (max-width: 768px) {
+    display: none;
+    width: 0;
+   }
+   
 }
 
 .dot {
   color: #EE296B;
   font-weight: 700;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 

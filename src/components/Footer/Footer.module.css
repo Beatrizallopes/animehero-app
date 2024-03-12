@@ -4,7 +4,7 @@
   /* background-color: #131B20; */
   padding: 1rem 1.5rem;
   position: absolute;
-  bottom: 0px;
+  bottom: 0px; 
 }
 
 .footer h1 {
@@ -12,6 +12,9 @@
   font-size: 14px;
   font-weight: 600;
   color: #F4F4F6;
+  @media screen and (max-width: 768px) {
+    text-align: center;
+  }
 }
 
 .heart {

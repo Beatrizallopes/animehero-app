@@ -1,5 +1,6 @@
 'use client'
 import {useState, useEffect} from 'react';
+import Link from 'next/link'
 import { LoadingOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
 import styles from "./AnimeRanking.module.css";
@@ -54,17 +55,17 @@ const AnimeRanking: React.FC = () => {
           {ranking.map((anime, index) => {
             if(index < 3){
               return (
-                <div key={index} className={styles.animeTop}>
+                <Link key={index} className={styles.animeTop} href={`/anime?id=${anime?.id}`}>
                   <img src={anime?.attributes?.coverImage?.tiny} alt={anime?.attributes?.canonicalTitle} className={styles.icon}/>
                   <h3>{index + 1}. {anime?.attributes?.canonicalTitle} ({anime?.attributes?.averageRating})</h3>
-                </div>
+                </Link>
               )
             } else {
               return (
-                <div key={index} className={styles.anime}>
+                <Link key={index} className={styles.anime} href={`/anime?id=${anime?.id}`}>
                   <img src={anime?.attributes?.coverImage?.tiny} alt={anime?.attributes?.canonicalTitle} className={styles.icon}/>
                   <h3>{index + 1}. {anime?.attributes?.canonicalTitle} ({anime?.attributes?.averageRating})</h3>
-              </div>
+              </Link>
               )
             }
 

@@ -42,7 +42,24 @@ export const getAnimesFiltered = async (category, limit, page, search) => {
     });
     return response;
   } catch (err) {
-    console.log('[getAnimes]', err?.response);
+    console.log('[getAnimesFiltered]', err?.response);
   }
   return null;
 };
+
+export const getTrendingAnimes = async () => {
+  try {
+    const response = await api.get('/trending/anime',{
+      params: {
+        page: {
+          limit: 10,
+        },
+      }
+    });
+    return response;
+  } catch (err) {
+    console.log('[getTrendingAnimes]', err?.response);
+  }
+  return null;
+};
+

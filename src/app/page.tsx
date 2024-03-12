@@ -10,6 +10,7 @@ import Footer from '@/components/Footer/Footer';
 import Tabs from "@/components/Tabs/Tabs";
 import AnimeBox from '@/components/AnimeBox/AnimeBox';
 import {getAnimes, getAnimesFiltered} from '../services/repository/animes';
+import AnimeRanking from '@/components/AnimeRanking/AnimeRanking';
 
 const tabsOptions = [
   {
@@ -131,11 +132,13 @@ export default function Home() {
           colorText: '#FFFFFF',
           colorTextDisabled: '#818080',
           colorBgContainer: '#161F25',
-          colorBorder:'#EE296B',
+          colorBorder:'#FFFFFF',
           colorErrorBg:'#161F25',
           colorTextDescription: '#FFFFFF',
           colorTextPlaceholder:'#FFFFFF',
           fontFamily:'Nunito',
+          colorIcon: '#EE296B',
+          colorFillSecondary: '#EE296B'
         },
         components: {
           Pagination: {
@@ -144,9 +147,10 @@ export default function Home() {
           Input: {
             activeBg: '#161F25',
             activeBorderColor: '#EE296B',
-            addonBg: '#EE296B',
+            // addonBg: '#FFFFFF',
             hoverBg: '#161F25',
-            hoverBorderColor:'#EE296B'
+            hoverBorderColor:'#EE296B',
+            addonBg: '#EE296B',
           }
         },
       }}
@@ -173,7 +177,8 @@ export default function Home() {
             />
         </div>
         <div className={styles.ranking}>
-
+          <h1>Top 10 animes <span className={styles.today}>today</span></h1>
+          <AnimeRanking></AnimeRanking>
         </div>
       </div> 
       <Footer></Footer>
